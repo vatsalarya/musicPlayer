@@ -1,19 +1,41 @@
 import React, {useContext, useEffect, useState} from "react";
 import './css/Home.scss';
 import Navigation from "../fragment/Navigation";
-import {useSelector} from "react-redux";
-import {ThemeContext} from "../../api/Theme";
 import MobileTopNavigation from "../fragment/MobileTopNavigation";
 import SideBar from "../fragment/SideBar";
 import FooterMusicPlayer from "../fragment/FooterMusicPlayer";
 import BottomNavigationMobile from "../fragment/BottomNavigationMobile";
 import MusicCardContainer from "../fragment/MusicCardContainer";
+import {useSelector} from "react-redux";
+import {ThemeContext} from "../../api/Theme";
+import Profile from "./Profile";
 import AddMusic from "../fragment/AddMusic";
 import FooterSelectMusic from "../fragment/FooterSelectMusic";
 import CurrentPlayingLarge from "../fragment/CurrentPlayingLarge";
+import Search from "./Search";
+import About from "./About";
 import Playlist from "../fragment/Playlist";
 import {Skeleton} from "@material-ui/lab";
 
+function getCurrPage(pathName) {
+    switch (pathName) {
+        case "/home":
+            return <MusicCardContainer/>
+        case "/home/search":
+            return <Search/>
+        case "/home/profile":
+            return <Profile/>
+        case "/home/add":
+            return <AddMusic/>
+        case "/home/about":
+            return <About/>
+        default:
+            if (pathName.startsWith("/home/playlist/")) {
+                return <Playlist/>
+            }
+            return null
+    }
+}
 
 function Home() {
 
